@@ -17,7 +17,7 @@ public partial class MainView : Window
         InitializeComponent();
         MainViewModel mainViewModel = new MainViewModel();
         DataContext = mainViewModel;
-//dadawd
+
         #region Testing
         Dispatcher.UIThread.Post(async () =>
         {
