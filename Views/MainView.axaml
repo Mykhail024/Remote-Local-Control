@@ -22,10 +22,10 @@
 					   HorizontalAlignment="Left" VerticalAlignment="Center"
 					   Margin="5 0"/>
 
-				<Image x:Name="BatteryCharging_Image" Source="resm:RLCClient.Resources.Icons.Battery.charging.png"
+				<Image x:Name="BatteryCharging_Image" IsVisible="{Binding BatteryChargingState}"
+					   Source="resm:RLCClient.Resources.Icons.Battery.charging.png"
 					   HorizontalAlignment="Left" VerticalAlignment="Center"
-					   Grid.Column="1" Margin="-11 0" Width="16" Height="16"
-					   IsVisible="{Binding BatteryChargingState}"/>
+					   Grid.Column="1" Margin="-11 0" Width="16" Height="16"/>
 				
 				<TextBlock x:Name="BatteryPercent_TextBox" Text="{Binding BatteryPercentString}"
 						   HorizontalAlignment="Left" VerticalAlignment="Center"
