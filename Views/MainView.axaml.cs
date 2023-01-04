@@ -18,17 +18,23 @@ public partial class MainView : Window
         MainViewModel mainViewModel = new MainViewModel();
         DataContext = mainViewModel;
 
+        #region Testing
         Dispatcher.UIThread.Post(async () =>
         {
+            await Task.Delay(1000);
+            mainViewModel.BatteryChargingState = true;
             int i = 0;
             while (i < 101)
             {
-                await Task.Delay(1000);
+
+                await Task.Delay(100);
                 mainViewModel.BatteryPercent = i;
                 i++;
             }
+            await Task.Delay(1000);
+            mainViewModel.BatteryChargingState = false;
         }, DispatcherPriority.Background);
-
+        #endregion
     }
 
     #region TitleLabel

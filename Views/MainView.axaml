@@ -18,11 +18,18 @@
 						   Grid.Column="0" Grid.ColumnSpan="3"/>
 				
 				<Image x:Name="BatteryPercent_Image" RenderTransform="rotate(90deg)"
-					   Source="{Binding BatteryImage}"/>
+					   Source="{Binding BatteryImage}" Grid.Column="0"
+					   HorizontalAlignment="Left" VerticalAlignment="Center"
+					   Margin="5 0"/>
+
+				<Image x:Name="BatteryCharging_Image" Source="resm:RLCClient.Resources.Icons.Battery.charging.png"
+					   HorizontalAlignment="Left" VerticalAlignment="Center"
+					   Grid.Column="1" Margin="-11 0" Width="16" Height="16"
+					   IsVisible="{Binding BatteryChargingState}"/>
 				
 				<TextBlock x:Name="BatteryPercent_TextBox" Text="{Binding BatteryPercentString}"
 						   HorizontalAlignment="Left" VerticalAlignment="Center"
-						   Grid.Column="1" Margin="-5 0"/>
+						   Grid.Column="1" Margin="{Binding BatteryPercent_TextBox_Margin}"/>
 
 				<Button x:Name="ButtonMinimize" Click="ButtonMinimizeClick"
 						Background="Transparent" BorderThickness="0"

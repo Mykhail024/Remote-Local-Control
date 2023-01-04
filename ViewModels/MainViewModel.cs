@@ -3,11 +3,14 @@ using System.IO;
 using Avalonia.Media.Imaging;
 using ReactiveUI;
 using System.Reflection;
+using Avalonia;
+using System.Threading.Tasks;
 
 namespace RLCClient.ViewModels
 {
     public class MainViewModel : ReactiveObject
     {
+        #region Battery
         private int _BatteryPercent = 0;
         public int BatteryPercent
         {
@@ -48,9 +51,34 @@ namespace RLCClient.ViewModels
         }
         public string BatteryPercentString
         {
-            get
+            get => _BatteryPercent + "%";
+        }
+        
+        private bool _BatteryChargingState = false;
+        public bool BatteryChargingState
+        {
+            get => _BatteryChargingState;
+            set
             {
-                return _BatteryPercent + "%";
+                if(value == true)
+                {
+                    BatteryPercent_TextBox_Margin = new Thickness(4, 0);
+                }
+                else if(value == false)
+                {
+                    BatteryPercent_TextBox_Margin = new Thickness(-6, 0);
+                }
+                this.RaiseAndSetIfChanged(ref _BatteryChargingState, value);
+            }
+        }
+
+        private Thickness _BatteryPercent_TextBox_Margin =  new Thickness(-6, 0);
+        public Thickness BatteryPercent_TextBox_Margin
+        {
+            get => _BatteryPercent_TextBox_Margin;
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _BatteryPercent_TextBox_Margin, value);
             }
         }
 
@@ -60,5 +88,6 @@ namespace RLCClient.ViewModels
             get =>  _BatteryImage;
             private set => this.RaiseAndSetIfChanged(ref _BatteryImage, value);
         }
+        #endregion
     }
 }

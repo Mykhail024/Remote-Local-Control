@@ -34,6 +34,7 @@
     <None Remove="Resources\Icons\Battery\battery-70.png" />
     <None Remove="Resources\Icons\Battery\battery-80.png" />
     <None Remove="Resources\Icons\Battery\battery-90.png" />
+    <None Remove="Resources\Icons\Battery\charging.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Icons\Battery\0.png" />
@@ -47,6 +48,7 @@
     <EmbeddedResource Include="Resources\Icons\Battery\70.png" />
     <EmbeddedResource Include="Resources\Icons\Battery\80.png" />
     <EmbeddedResource Include="Resources\Icons\Battery\90.png" />
+    <EmbeddedResource Include="Resources\Icons\Battery\charging.png" />
   </ItemGroup>
 
   <ItemGroup>
