@@ -2,6 +2,9 @@ using Avalonia;
 using Avalonia.ReactiveUI;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using RLCClient.ViewModels;
+using System.Diagnostics;
+using System.Threading;
 
 namespace RLCClient;
 

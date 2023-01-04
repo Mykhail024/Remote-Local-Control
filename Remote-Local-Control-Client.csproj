@@ -3,12 +3,50 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
-    <RootNamespace>Client</RootNamespace>
+    <RootNamespace>RLCClient</RootNamespace>
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
     <ApplicationManifest>app.manifest</ApplicationManifest>
+    <Platforms>AnyCPU</Platforms>
+    <PlatformTarget>x64</PlatformTarget>
+    <BaseOutputPath>C:\Users\semer\Documents\Programming\.Net\Remote-Local-Control\Remote-Local-Control-Client\bin\x64</BaseOutputPath>
   </PropertyGroup>
   <ItemGroup>
     <None Remove=".gitignore" />
+    <None Remove="Resources\Icons\Battery\0.png" />
+    <None Remove="Resources\Icons\Battery\10.png" />
+    <None Remove="Resources\Icons\Battery\100.png" />
+    <None Remove="Resources\Icons\Battery\20.png" />
+    <None Remove="Resources\Icons\Battery\30.png" />
+    <None Remove="Resources\Icons\Battery\40.png" />
+    <None Remove="Resources\Icons\Battery\50.png" />
+    <None Remove="Resources\Icons\Battery\60.png" />
+    <None Remove="Resources\Icons\Battery\70.png" />
+    <None Remove="Resources\Icons\Battery\80.png" />
+    <None Remove="Resources\Icons\Battery\90.png" />
+    <None Remove="Resources\Icons\Battery\battery-0.png" />
+    <None Remove="Resources\Icons\Battery\battery-10.png" />
+    <None Remove="Resources\Icons\Battery\battery-100.png" />
+    <None Remove="Resources\Icons\Battery\battery-20.png" />
+    <None Remove="Resources\Icons\Battery\battery-30.png" />
+    <None Remove="Resources\Icons\Battery\battery-40.png" />
+    <None Remove="Resources\Icons\Battery\battery-50.png" />
+    <None Remove="Resources\Icons\Battery\battery-60.png" />
+    <None Remove="Resources\Icons\Battery\battery-70.png" />
+    <None Remove="Resources\Icons\Battery\battery-80.png" />
+    <None Remove="Resources\Icons\Battery\battery-90.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Icons\Battery\0.png" />
+    <EmbeddedResource Include="Resources\Icons\Battery\10.png" />
+    <EmbeddedResource Include="Resources\Icons\Battery\100.png" />
+    <EmbeddedResource Include="Resources\Icons\Battery\20.png" />
+    <EmbeddedResource Include="Resources\Icons\Battery\30.png" />
+    <EmbeddedResource Include="Resources\Icons\Battery\40.png" />
+    <EmbeddedResource Include="Resources\Icons\Battery\50.png" />
+    <EmbeddedResource Include="Resources\Icons\Battery\60.png" />
+    <EmbeddedResource Include="Resources\Icons\Battery\70.png" />
+    <EmbeddedResource Include="Resources\Icons\Battery\80.png" />
+    <EmbeddedResource Include="Resources\Icons\Battery\90.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,5 +60,9 @@
     <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="0.10.18" />
     <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.18" />
     <PackageReference Include="XamlNameReferenceGenerator" Version="1.5.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Remote-Local-Control-Core\Remote-Local-Control-Core.csproj" />
   </ItemGroup>
 </Project>

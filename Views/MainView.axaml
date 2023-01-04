@@ -2,8 +2,54 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-        x:Class="RLCClient.Views.MainView"
-        Title="Remote_Local_Control">
-    Welcome to Avalonia!
+        mc:Ignorable="d" d:DesignWidth="950" d:DesignHeight="600"
+        x:Class="RLCClient.Views.MainView" Title="Remote Local Control Client"
+		Background="#202020" WindowStartupLocation="CenterScreen"
+		SystemDecorations="BorderOnly" CanResize="False" Width="950" Height="600">
+
+	<Grid RowDefinitions="9*, 241*">
+		<Label x:Name="Titlelabel" PointerPressed="BeginMoveDrag"
+			   Background="#191919" Foreground="White" Padding="0"
+			   Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4">
+
+			<Grid ColumnDefinitions="18*, 20*, 419*, 14*, 14*">	
+				<TextBlock x:Name="Title" Text="Disconnected"
+						   HorizontalAlignment="Center" VerticalAlignment="Center"
+						   Grid.Column="0" Grid.ColumnSpan="3"/>
+				
+				<Image x:Name="BatteryPercent_Image" RenderTransform="rotate(90deg)"
+					   Source="{Binding BatteryImage}"/>
+				
+				<TextBlock x:Name="BatteryPercent_TextBox" Text="{Binding BatteryPercentString}"
+						   HorizontalAlignment="Left" VerticalAlignment="Center"
+						   Grid.Column="1" Margin="-5 0"/>
+
+				<Button x:Name="ButtonMinimize" Click="ButtonMinimizeClick"
+						Background="Transparent" BorderThickness="0"
+						CornerRadius="0" Grid.Column="3">
+					<Path Data="M20,14H2V11H20" Fill="White"
+						  Width="26" Height="20" Margin="5 6 0 0"/>
+				</Button>
+				
+				<Button x:Name="ButtonClose" Click="ButtonCloseClick"
+						Background="Transparent" BorderThickness="0"
+						CornerRadius="0" Grid.Column="4">
+					<Path Data="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"
+						  Fill="White" Width="26" Height="20" Margin="3.5 0 0 3"/>
+				</Button>
+
+				<Grid.Styles>
+					<Style Selector="Button:pointerover /template/ ContentPresenter">
+						<Setter Property="Background" Value="#202020"/>
+					</Style>
+					<Style Selector="Button:pressed /template/ ContentPresenter">
+						<Setter Property="Background" Value="#242424"/>
+					</Style>
+				</Grid.Styles>
+			</Grid>
+			
+		</Label>
+		
+	</Grid>
+	
 </Window>
