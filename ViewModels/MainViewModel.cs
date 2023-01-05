@@ -1,14 +1,17 @@
 ﻿using System;
-using System.IO;
 using Avalonia.Media.Imaging;
 using ReactiveUI;
 using System.Reflection;
 using Avalonia;
 using System.Threading.Tasks;
+using RLCCore;
+using Avalonia.Controls.Shapes;
+using System.Text;
+using System.Text.Json.Serialization;
 
 namespace RLCClient.ViewModels
 {
-    public class MainViewModel : ReactiveObject
+    public partial class MainViewModel : ReactiveObject
     {
         #region Battery
         private int _BatteryPercent = 0;
@@ -88,6 +91,8 @@ namespace RLCClient.ViewModels
             get =>  _BatteryImage;
             private set => this.RaiseAndSetIfChanged(ref _BatteryImage, value);
         }
+
         #endregion
+
     }
 }
