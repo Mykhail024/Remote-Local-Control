@@ -2,14 +2,13 @@
 using System.IO;
 using Path = System.IO.Path;
 using System.Text.Json;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace RLCClient.ViewModels
 {
 
     public class Settings
     {
-        private static readonly Settings DefaultSettings = new Settings() { ClientName = "Name", Port = 25565, ShutdownTimeOut = 1, RestartTimeOut = 1 };
+        public static readonly Settings DefaultSettings = new Settings() { ClientName = "Name", Port = 25565, ShutdownTimeOut = 1, RestartTimeOut = 1 };
         private static readonly string ConfigPath = $@"{Path.GetDirectoryName(Environment.ProcessPath)}\Configs";
         private static readonly string ConfigFile = @"Settings.json";
         private static readonly string ConfigFullPath = ConfigPath + @"\" + ConfigFile;
@@ -68,6 +67,7 @@ namespace RLCClient.ViewModels
                 RestartTimeOut = this.RestartTimeOut
             };
 
+            File.Delete(ConfigFullPath);
             using (FileStream fs = new FileStream(ConfigFullPath, FileMode.OpenOrCreate, FileAccess.Write))
             {
                 JsonSerializer.Serialize<Settings>(fs, settings, new JsonSerializerOptions { WriteIndented = true });
