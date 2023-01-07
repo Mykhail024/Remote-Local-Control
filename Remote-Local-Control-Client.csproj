@@ -12,6 +12,7 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove=".gitignore" />
+    <None Remove="Configs\**" />
     <None Remove="Resources\Icons\Battery\0.png" />
     <None Remove="Resources\Icons\Battery\10.png" />
     <None Remove="Resources\Icons\Battery\100.png" />

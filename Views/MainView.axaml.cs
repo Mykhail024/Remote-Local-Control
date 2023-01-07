@@ -13,6 +13,7 @@ using System.ComponentModel;
 using System.Drawing.Text;
 using System.Drawing.Printing;
 using Avalonia;
+using System.Diagnostics;
 
 namespace RLCClient.Views;
 
@@ -71,36 +72,20 @@ public partial class MainView : Window
     }
 
     public TextBoxOutputter? outputter;
+    MainViewModel mainViewModel = new MainViewModel();
 
     public MainView()
     {
         InitializeComponent();
-        
-        MainViewModel mainViewModel = new MainViewModel();
+
         DataContext = mainViewModel;
 
         outputter = new TextBoxOutputter(LogOut);
         Console.SetOut(outputter);
 
-        #region Testing
-        Dispatcher.UIThread.Post(async () =>
-        {
-            await Task.Delay(1000);
-            mainViewModel.BatteryChargingState = true;
-            int i = 0;
-            while (i < 101)
-            {
-
-                await Task.Delay(100);
-                mainViewModel.BatteryPercent = i;
-                i++;
-            }
-            await Task.Delay(1000);
-            mainViewModel.BatteryChargingState = false;
-        }, DispatcherPriority.Background);
-        #endregion
-
         InitSettings();
+        //Called only when debugging.
+        InitCustomDebugMethod();
 
         this.Closing += WindowClosing;
     }
@@ -282,4 +267,25 @@ public partial class MainView : Window
         this.WindowState = WindowState.Minimized;
     }
     #endregion
+
+    [Conditional("DEBUG")]
+    private void InitCustomDebugMethod()
+    {
+        Dispatcher.UIThread.Post(async () =>
+        {
+            await Task.Delay(1000);
+            mainViewModel.BatteryChargingState = true;
+            int i = 0;
+            while (i < 101)
+            {
+
+                await Task.Delay(100);
+                mainViewModel.BatteryPercent = i;
+                i++;
+            }
+            await Task.Delay(1000);
+            mainViewModel.BatteryChargingState = false;
+        }, DispatcherPriority.Background);
+    }
+
 }
