@@ -4,7 +4,6 @@ using ReactiveUI;
 using System.Reflection;
 using Avalonia;
 using System.Threading.Tasks;
-using RLCCore;
 using Avalonia.Controls.Shapes;
 using System.Text;
 using System.Text.Json.Serialization;

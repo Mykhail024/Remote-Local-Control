@@ -66,6 +66,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Remote-Local-Control-Core\Remote-Local-Control-Core.csproj" />
+    <None Update="LICENSE.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="README.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>
