@@ -65,7 +65,7 @@
 
 				<TabItem x:Name="PowerTab" Header="Power"/>
 				<TabItem x:Name="MusictTab" Header="Music"/>
-				<TabItem x:Name="SettingsTab" Header="Settings">
+				<TabItem x:Name="SettingsTab" Header="Settings" IsSelected="False">
 					<Grid ColumnDefinitions="1*, 80*, 2*, 10*, 1*"
 						  RowDefinitions="20*, 20*, 20*, 20*, 20*, 20*, 20*, 20*, 20*, 20*, 20*, 20*, 20*, 20*, 20*, 20*, 20*, 20*, 20*, 20*,20*, 20*, 10*"
 						  ShowGridLines="False">

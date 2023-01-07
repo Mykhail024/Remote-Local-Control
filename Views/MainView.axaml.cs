@@ -18,6 +18,41 @@ namespace RLCClient.Views;
 
 public partial class MainView : Window
 {
+    public Settings CurrentSettings
+    {
+        get
+        {
+            Settings _settings = new Settings()
+            {
+                ClientName = ClientName_TextBox.Text,
+                Port = int.Parse(ConnectionPort_TextBox.Text),
+                ShutdownTimeOut = int.Parse(ShutDownTimeOut_TextBox.Text),
+                RestartTimeOut = int.Parse(RestartTimeOut_TextBox.Text)
+            };
+            return _settings;
+        }
+        set
+        {
+            ClientName_TextBox.Text = value.ClientName;
+            ConnectionPort_TextBox.Text = value.Port.ToString();
+            ShutDownTimeOut_TextBox.Text = value.ShutdownTimeOut.ToString();
+            RestartTimeOut_TextBox.Text = value.RestartTimeOut.ToString();
+        }
+    }
+    private bool isSettingsSaved
+    {
+        get
+        {
+            if (CurrentSettings.Equals(Settings.Load()))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+    }
     private bool SettingsTabElementsIsEnableState 
     {
         set
@@ -34,8 +69,8 @@ public partial class MainView : Window
             ResetSettings_Button.IsEnabled = value;
         }
     }
+
     public TextBoxOutputter? outputter;
-    public Settings? settings;
 
     public MainView()
     {
@@ -74,101 +109,84 @@ public partial class MainView : Window
     {
         try
         {
-            settings = Settings.Load();
 
-            ClientName_TextBox.Text = settings.ClientName;
-            ConnectionPort_TextBox.Text = settings.Port.ToString();
-            ShutDownTimeOut_TextBox.Text = settings.ShutdownTimeOut.ToString();
-            RestartTimeOut_TextBox.Text = settings.RestartTimeOut.ToString();
+            CurrentSettings = Settings.Load();
 
             #region ResetButtonsClick
             ResetClientName_Button.Click += (_, __) =>
             {
-                ClientName_TextBox.Text = Settings.DefaultSettings.ClientName;
+                CurrentSettings = new Settings 
+                { 
+                    ClientName = Settings.DefaultSettings.ClientName, 
+                    Port = CurrentSettings.Port, 
+                    ShutdownTimeOut = CurrentSettings.ShutdownTimeOut, 
+                    RestartTimeOut = CurrentSettings.RestartTimeOut
+                };
             };
             ResetPort_Button.Click += (_, __) =>
             {
-                ConnectionPort_TextBox.Text = Settings.DefaultSettings.Port.ToString();
+                CurrentSettings = new Settings 
+                { 
+                    ClientName = CurrentSettings.ClientName, 
+                    Port = Settings.DefaultSettings.Port, 
+                    ShutdownTimeOut = CurrentSettings.ShutdownTimeOut, 
+                    RestartTimeOut = CurrentSettings.RestartTimeOut 
+                };
             };
             ResetShutdownTimeOut_Button.Click += (_, __) =>
             {
-                ShutDownTimeOut_TextBox.Text = Settings.DefaultSettings.ShutdownTimeOut.ToString();
+                CurrentSettings = new Settings 
+                { 
+                    ClientName = CurrentSettings.ClientName, 
+                    Port = CurrentSettings.Port, 
+                    ShutdownTimeOut = Settings.DefaultSettings.ShutdownTimeOut, 
+                    RestartTimeOut = CurrentSettings.RestartTimeOut 
+                };
             };
             ResetRestartTimeOut_Button.Click += (_, __) =>
             {
-                RestartTimeOut_TextBox.Text = Settings.DefaultSettings.RestartTimeOut.ToString();
+                CurrentSettings = new Settings 
+                { 
+                    ClientName = CurrentSettings.ClientName, 
+                    Port = CurrentSettings.Port, 
+                    ShutdownTimeOut = CurrentSettings.ShutdownTimeOut, 
+                    RestartTimeOut = Settings.DefaultSettings.RestartTimeOut 
+                };
             };
-            #endregion
-
-            #region TextBoxPropertyChanged
-            ConnectionPort_TextBox.PropertyChanged += (sender, __) =>
-            {
-                TextBox_OnlyNumberFilter(ref sender);
-            };
-            ShutDownTimeOut_TextBox.PropertyChanged += (sender, __) =>
-            {
-                TextBox_OnlyNumberFilter(ref sender);
-            };
-            RestartTimeOut_TextBox.PropertyChanged += (sender, __) =>
-            {
-                TextBox_OnlyNumberFilter(ref sender);
-            };
-            #endregion
-
             ResetSettings_Button.Click += async (_, __) =>
             {
                 if (await MessageBox.Show(this, "Reset all settings to default?", MessageBox.MessageBoxButtons.YesNo, "Confirm request") == MessageBox.MessageBoxResult.Yes)
                 {
-                    ClientName_TextBox.Text = Settings.DefaultSettings.ClientName.ToString();
-                    ConnectionPort_TextBox.Text = Settings.DefaultSettings.Port.ToString();
-                    ShutDownTimeOut_TextBox.Text = Settings.DefaultSettings.ShutdownTimeOut.ToString();
-                    RestartTimeOut_TextBox.Text = Settings.DefaultSettings.RestartTimeOut.ToString();
-
+                    CurrentSettings = Settings.DefaultSettings;
                 }
             };
 
+            #endregion
+
+            #region TextBoxPropertyChanged
+            ConnectionPort_TextBox.PropertyChanged += TextBox_OnlyNumberFilter;
+            ShutDownTimeOut_TextBox.PropertyChanged += TextBox_OnlyNumberFilter;
+            RestartTimeOut_TextBox.PropertyChanged += TextBox_OnlyNumberFilter;
+            #endregion
+
             ApplySettings_Button.Click += (_, __) =>
             {
-                SettingsTabElementsIsEnableState = false;
-
-                settings.ClientName = ClientName_TextBox.Text;
-                settings.Port = int.Parse(ConnectionPort_TextBox.Text);
-                settings.ShutdownTimeOut = int.Parse(ShutDownTimeOut_TextBox.Text);
-                settings.RestartTimeOut = int.Parse(RestartTimeOut_TextBox.Text);
-
-                settings.Save();
-
-                SettingsTabElementsIsEnableState = true;
+                SaveCurrentSettingsToConfig();
             };
 
+            //If settings not saved
             MainTabControl.SelectionChanged += async (_, __) =>
             {
-                if ((MainTabControl.SelectedItem != SettingsTab) &&
-                    (ClientName_TextBox.Text != settings.ClientName ||
-                    ConnectionPort_TextBox.Text != settings.Port.ToString() ||
-                    ShutDownTimeOut_TextBox.Text != settings.ShutdownTimeOut.ToString() ||
-                    RestartTimeOut_TextBox.Text != settings.RestartTimeOut.ToString()))
+                if (!isSettingsSaved && MainTabControl.SelectedItem != SettingsTab)
                 {
                     SettingsTab.IsSelected = true;
                     if (await MessageBox.Show(this, $"Save unsaved settings?", MessageBox.MessageBoxButtons.YesNo, "Confirm request") == MessageBox.MessageBoxResult.Yes)
                     {
-                        SettingsTabElementsIsEnableState = false;
-
-                        settings.ClientName = ClientName_TextBox.Text;
-                        settings.Port = int.Parse(ConnectionPort_TextBox.Text);
-                        settings.ShutdownTimeOut = int.Parse(ShutDownTimeOut_TextBox.Text);
-                        settings.RestartTimeOut = int.Parse(RestartTimeOut_TextBox.Text);
-
-                        settings.Save();
-
-                        SettingsTabElementsIsEnableState = true;
+                        SaveCurrentSettingsToConfig();
                     }
                     else
                     {
-                        ClientName_TextBox.Text = settings.ClientName;
-                        ConnectionPort_TextBox.Text = settings.Port.ToString();
-                        ShutDownTimeOut_TextBox.Text = settings.ShutdownTimeOut.ToString();
-                        RestartTimeOut_TextBox.Text = settings.RestartTimeOut.ToString();
+                        CurrentSettings = Settings.Load();
                     }
                 }
             };
@@ -182,7 +200,16 @@ public partial class MainView : Window
 
     }
 
-    private static void TextBox_OnlyNumberFilter(ref object? sender)
+    private void SaveCurrentSettingsToConfig()
+    {
+        SettingsTabElementsIsEnableState = false;
+
+        CurrentSettings.Save();
+
+        SettingsTabElementsIsEnableState = true;
+    }
+
+    private static void TextBox_OnlyNumberFilter(object? sender, EventArgs e)
     {
         TextBox textBox = (TextBox)sender;
 
@@ -195,16 +222,49 @@ public partial class MainView : Window
         }
     }
 
-    private static async void WindowClosing(object? sender, CancelEventArgs e)
+    private async void WindowClosing(object? sender, CancelEventArgs e)
     {
-        Window window = (Window)sender;
-
         e.Cancel = true;
-        if (await MessageBox.Show(window, "Disconnect and close program?", MessageBox.MessageBoxButtons.OkCancel) == MessageBox.MessageBoxResult.Ok)
+        async void Close(bool Dialog)
         {
+            Window window = (Window)sender;
 
-            window.Closing -= WindowClosing;
-            window.Close();
+            if(Dialog)
+            {
+
+                if (await MessageBox.Show(window, "Disconnect and close program?", MessageBox.MessageBoxButtons.OkCancel) == MessageBox.MessageBoxResult.Ok)
+                {
+                    Close();
+                }
+            }
+            else
+            {
+                Close();
+            }
+
+            void Close()
+            {
+                window.Closing -= WindowClosing;
+                window.Close();
+            }
+        }
+
+        if(isSettingsSaved)
+        {
+            Close(true);
+        }
+        else
+        {
+            if (await MessageBox.Show(this, $"Save unsaved settings?", MessageBox.MessageBoxButtons.YesNo, "Confirm request") == MessageBox.MessageBoxResult.Yes)
+            {
+                SaveCurrentSettingsToConfig();
+                Close(false);
+            }
+            else
+            {
+                CurrentSettings = Settings.Load();
+                Close(true);
+            }
         }
     }
 

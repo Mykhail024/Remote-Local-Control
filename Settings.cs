@@ -83,5 +83,20 @@ namespace RLCClient.ViewModels
             File.Delete(ConfigFullPath);
             Save();
         }
+
+        public override bool Equals(object? obj)
+        {
+            Settings settings = (Settings)obj;
+
+            if(ClientName == settings.ClientName && Port == settings.Port && ShutdownTimeOut == settings.ShutdownTimeOut && RestartTimeOut == settings.RestartTimeOut)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
     }
 }
