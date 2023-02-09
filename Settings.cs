@@ -2,13 +2,15 @@
 using System.IO;
 using Path = System.IO.Path;
 using System.Text.Json;
+using System.Collections.Generic;
+using System.Net;
 
 namespace RLCClient.ViewModels
 {
 
     public class Settings
     {
-        public static readonly Settings DefaultSettings = new Settings() { ClientName = "Name", Port = 25565, ShutdownTimeOut = 1, RestartTimeOut = 1 };
+        public static readonly Settings DefaultSettings = new Settings() { ClientName = "Name", Port = 25565, ShutdownTimeOut = 1, RestartTimeOut = 1, FilterIPAdresses = new List<IPAddress>() {IPAddress.Any} };
         private static readonly string ConfigPath = $@"{Path.GetDirectoryName(Environment.ProcessPath)}\Configs";
         private static readonly string ConfigFile = @"Settings.json";
         private static readonly string ConfigFullPath = ConfigPath + @"\" + ConfigFile;
@@ -24,6 +26,8 @@ namespace RLCClient.ViewModels
 
         /// <summary>Restart time-out in minutes</summary>
         public int RestartTimeOut { get; set; }
+
+        public List<IPAddress>? FilterIPAdresses { get; set; }
 
         /// <summary>Load Settings from .config or create new .config</summary>
         public static Settings Load()
@@ -64,7 +68,8 @@ namespace RLCClient.ViewModels
                 ClientName = this.ClientName,
                 Port = this.Port,
                 ShutdownTimeOut = this.ShutdownTimeOut,
-                RestartTimeOut = this.RestartTimeOut
+                RestartTimeOut = this.RestartTimeOut,
+                FilterIPAdresses = this.FilterIPAdresses
             };
 
             File.Delete(ConfigFullPath);
@@ -80,6 +85,7 @@ namespace RLCClient.ViewModels
             Port = DefaultSettings.Port;
             ShutdownTimeOut = DefaultSettings.ShutdownTimeOut;
             RestartTimeOut = DefaultSettings.RestartTimeOut;
+            FilterIPAdresses = DefaultSettings.FilterIPAdresses;
             File.Delete(ConfigFullPath);
             Save();
         }
@@ -88,7 +94,7 @@ namespace RLCClient.ViewModels
         {
             Settings settings = (Settings)obj;
 
-            if(ClientName == settings.ClientName && Port == settings.Port && ShutdownTimeOut == settings.ShutdownTimeOut && RestartTimeOut == settings.RestartTimeOut)
+            if(ClientName == settings.ClientName && Port == settings.Port && ShutdownTimeOut == settings.ShutdownTimeOut && RestartTimeOut == settings.RestartTimeOut && FilterIPAdresses == settings.FilterIPAdresses)
             {
                 return true;
             }
@@ -96,7 +102,10 @@ namespace RLCClient.ViewModels
             {
                 return false;
             }
-
+        }
+        public override int GetHashCode()
+        {
+            return this.GetHashCode();
         }
     }
 }

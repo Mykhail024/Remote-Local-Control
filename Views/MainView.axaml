@@ -64,66 +64,75 @@
 						TabStripPlacement="Left" x:Name="MainTabControl">
 
 				<TabItem x:Name="PowerTab" Header="Power"/>
-				<TabItem x:Name="MusictTab" Header="Music"/>
-				<TabItem x:Name="SettingsTab" Header="Settings" IsSelected="False">
-					<Grid ColumnDefinitions="1*, 80*, 2*, 10*, 1*"
-						  RowDefinitions="20*, 20*, 20*, 20*, 20*, 20*, 20*, 20*, 20*, 20*, 20*, 20*, 20*, 20*, 20*, 20*, 20*, 20*, 20*, 20*,20*, 20*, 10*"
-						  ShowGridLines="False">
-
-						<TextBlock Text="Client name:" Grid.Column="1" Grid.Row="1"
-								   Grid.ColumnSpan="3" Margin="5" 
-								   VerticalAlignment="Center"/>
-						<TextBox x:Name="ClientName_TextBox" Grid.Column="1" Grid.Row="2"
-								 HorizontalAlignment="Stretch" VerticalAlignment="Center"
-								 Margin="4 5 0 3.5" CornerRadius="0"/>
-						<Button Grid.Column="3" Grid.Row="2" HorizontalAlignment="Stretch"
-								VerticalAlignment="Stretch" CornerRadius="1"
-								VerticalContentAlignment="Center" HorizontalContentAlignment="Center" 
-								Content="Reset" Padding="0" x:Name="ResetClientName_Button"/>
-
-						<TextBlock Text="Connection port:" Grid.Column="1" Grid.Row="3"
-								   Grid.ColumnSpan="3" Margin="5"
-								   VerticalAlignment="Center"/>
-						<TextBox x:Name="ConnectionPort_TextBox" Grid.Column="1" Grid.Row="4"
-								 HorizontalAlignment="Stretch" VerticalAlignment="Center"
-								 Margin="4 5 0 3.5" CornerRadius="0"/>
-						<Button Grid.Column="3" Grid.Row="4" HorizontalAlignment="Stretch"
-								VerticalAlignment="Stretch" CornerRadius="1"
-								VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
-								Content="Reset" Padding="0" x:Name="ResetPort_Button"/>
-
-						<TextBlock Text="Shutdown time-out in minutes:" Grid.Column="1" Grid.Row="5"
-								   Grid.ColumnSpan="3" Margin="5"
-								   VerticalAlignment="Center"/>
-						<TextBox x:Name="ShutDownTimeOut_TextBox" Grid.Column="1" Grid.Row="6"
-								 HorizontalAlignment="Stretch" VerticalAlignment="Center"
-								 Margin="4 5 0 3.5" CornerRadius="0"/>
-						<Button Grid.Column="3" Grid.Row="6" HorizontalAlignment="Stretch"
-								VerticalAlignment="Stretch" CornerRadius="1"
-								VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
-								Content="Reset" Padding="0" x:Name="ResetShutdownTimeOut_Button"/>
-
-						<TextBlock Text="Restart time-out in minutes:" Grid.Column="1" Grid.Row="7"
-								   Grid.ColumnSpan="3" Margin="5"
-								   VerticalAlignment="Center"/>
-						<TextBox x:Name="RestartTimeOut_TextBox" Grid.Column="1" Grid.Row="8"
-								 HorizontalAlignment="Stretch" VerticalAlignment="Center"
-								 Margin="4 5 0 3.5" CornerRadius="0"/>
-						<Button Grid.Column="3" Grid.Row="8" HorizontalAlignment="Stretch"
-								VerticalAlignment="Stretch" CornerRadius="1"
-								VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
-								Content="Reset" Padding="0" x:Name="ResetRestartTimeOut_Button"/>
-
-
-						<Button x:Name="ApplySettings_Button" Grid.Column="2" Grid.Row="20"
-								HorizontalAlignment="Left" Grid.ColumnSpan="2" VerticalAlignment="Center"
-								Grid.RowSpan="2" Width="80" Content="Apply" HorizontalContentAlignment="Center"
-								VerticalContentAlignment="Center"/>
-						<Button x:Name="ResetSettings_Button" Grid.Column="1" Grid.Row="20"
-								HorizontalAlignment="Right" Grid.ColumnSpan="2" VerticalAlignment="Center"
-								Grid.RowSpan="2" Width="80" Content="Reset" HorizontalContentAlignment="Center"
-								VerticalContentAlignment="Center" Margin="0 0 30 0"/>
+				<TabItem x:Name="MusictTab" Header="Music" IsSelected="True">
+					<Grid>
 						
+					</Grid>
+				</TabItem>
+				<TabItem x:Name="SettingsTab" Header="Settings" IsSelected="True">
+					<Grid>
+						<ScrollViewer Margin="0 0 0 60" 
+									  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+									  ScrollViewer.VerticalScrollBarVisibility="Auto">
+							<Grid ColumnDefinitions="1*, 80*, 2*, 10*, 2.5*"
+							  RowDefinitions="20*, 20*, 20*, 20*, 20*, 20*, 20*, 20*, 20*, 20*, 20*, 20*, 20*, 20*, 20*, 20*, 20*, 20*, 20*, 20*,20*, 20*, 10*"
+							  ShowGridLines="False" Height="NaN">
+
+								<TextBlock Text="Client name:" Grid.Column="1" Grid.Row="1"
+										   Grid.ColumnSpan="3" Margin="5"
+										   VerticalAlignment="Center"/>
+								<TextBox x:Name="ClientName_TextBox" Grid.Column="1" Grid.Row="2"
+										 HorizontalAlignment="Stretch" VerticalAlignment="Center"
+										 Margin="4 5 0 3.5" CornerRadius="0"/>
+								<Button Grid.Column="3" Grid.Row="2" HorizontalAlignment="Stretch"
+										VerticalAlignment="Stretch" CornerRadius="1"
+										VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
+										Content="Reset" Padding="0" x:Name="ResetClientName_Button"/>
+
+								<TextBlock Text="Connection port:" Grid.Column="1" Grid.Row="3"
+										   Grid.ColumnSpan="3" Margin="5"
+										   VerticalAlignment="Center"/>
+								<TextBox x:Name="ConnectionPort_TextBox" Grid.Column="1" Grid.Row="4"
+										 HorizontalAlignment="Stretch" VerticalAlignment="Center"
+										 Margin="4 5 0 3.5" CornerRadius="0"/>
+								<Button Grid.Column="3" Grid.Row="4" HorizontalAlignment="Stretch"
+										VerticalAlignment="Stretch" CornerRadius="1"
+										VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
+										Content="Reset" Padding="0" x:Name="ResetPort_Button"/>
+
+								<TextBlock Text="Shutdown time-out in minutes:" Grid.Column="1" Grid.Row="5"
+										   Grid.ColumnSpan="3" Margin="5"
+										   VerticalAlignment="Center"/>
+								<TextBox x:Name="ShutDownTimeOut_TextBox" Grid.Column="1" Grid.Row="6"
+										 HorizontalAlignment="Stretch" VerticalAlignment="Center"
+										 Margin="4 5 0 3.5" CornerRadius="0"/>
+								<Button Grid.Column="3" Grid.Row="6" HorizontalAlignment="Stretch"
+										VerticalAlignment="Stretch" CornerRadius="1"
+										VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
+										Content="Reset" Padding="0" x:Name="ResetShutdownTimeOut_Button"/>
+
+								<TextBlock Text="Restart time-out in minutes:" Grid.Column="1" Grid.Row="7"
+										   Grid.ColumnSpan="3" Margin="5"
+										   VerticalAlignment="Center"/>
+								<TextBox x:Name="RestartTimeOut_TextBox" Grid.Column="1" Grid.Row="8"
+										 HorizontalAlignment="Stretch" VerticalAlignment="Center"
+										 Margin="4 5 0 3.5" CornerRadius="0"/>
+								<Button Grid.Column="3" Grid.Row="8" HorizontalAlignment="Stretch"
+										VerticalAlignment="Stretch" CornerRadius="1"
+										VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
+										Content="Reset" Padding="0" x:Name="ResetRestartTimeOut_Button"/>
+							</Grid>
+						</ScrollViewer>
+						
+						<Button x:Name="ApplySettings_Button" Content="Apply"
+								HorizontalAlignment="Right" VerticalAlignment="Bottom"
+								HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+								Width="80" Margin="20 20"/>
+						<Button x:Name="ResetSettings_Button" Content="Reset"
+								HorizontalAlignment="Right" VerticalAlignment="Bottom" 
+								HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+								Width="80" Margin="110 20"/>
+
 						<Grid.Styles>
 							<Style Selector="Button">
 								<Setter Property="Background" Value="#262626"/>
@@ -142,7 +151,7 @@
 						</Grid.Styles>
 					</Grid>
 				</TabItem>
-				<TabItem x:Name="LogTab" Header="Log" IsSelected="True">	
+				<TabItem x:Name="LogTab" Header="Log">	
 					<TextBox x:Name="LogOut" Focusable="False"
 							 TextWrapping="Wrap" IsReadOnly="True" 
 							 FontSize="14" Foreground="White" Margin="20">
@@ -164,7 +173,90 @@
 						</TextBox.Styles>
 					</TextBox>
 				</TabItem>
-							
+				<TabItem x:Name="ConnectTab" Header="Connect" IsSelected="True">
+					<Grid>
+						<StackPanel Orientation="Horizontal" Spacing="5" Margin="14 10 0 0">
+							<Border Width="150">
+								<TextBlock Text="Name"/>
+							</Border>
+							<Border Width="150">
+								<TextBlock Text="Ip"/>
+							</Border>
+							<Border Width="120">
+								<TextBlock Text="Port"/>
+							</Border>
+							<Border Width="120">
+								<TextBlock Text="OS"/>
+							</Border>
+							<Border Width="180">
+								<TextBlock HorizontalAlignment="Right" Text="Port"/>
+							</Border>
+						</StackPanel>
+						<ListBox Margin="0 30 0 90" Background="#242424" 
+								 BorderBrush="#606060" BorderThickness="1"
+								 Items="{Binding Clients, Mode=OneWay}"
+								 SelectionMode="Single">
+							<ListBox.ItemTemplate>
+								<DataTemplate>
+									<StackPanel Orientation="Horizontal" Spacing="5">
+										<Border Width="150">
+											<TextBlock Text="{Binding Name}"/>
+										</Border>
+										<Border Width="150">
+											<TextBlock Text="{Binding Ip}"/>
+										</Border>
+										<Border Width="120">
+											<TextBlock Text="{Binding Port}"/>
+										</Border>
+										<Border Width="120">
+											<TextBlock Text="{Binding OS}"/>
+										</Border>
+										<Border Width="180">
+											<TextBlock HorizontalAlignment="Right" Text="{Binding Ping}"/>
+										</Border>
+									</StackPanel>
+								</DataTemplate>
+							</ListBox.ItemTemplate>
+							<ListBox.Styles>
+								<Style Selector="ListBoxItem">
+									<Setter	Property="Background" Value="Transparent"/>
+									<Setter Property="BorderBrush" Value="#999999"/>
+									<Setter Property="BorderThickness" Value="0 0 0 0.5"/>
+								</Style>
+								<Style Selector="ListBoxItem:pointerover /template/ ContentPresenter">
+									<Setter Property="Background" Value="#282828"/>
+								</Style>
+								<Style Selector="ListBoxItem:selected /template/ ContentPresenter">
+									<Setter Property="Background" Value="#363636"/>
+								</Style>
+								
+							</ListBox.Styles>
+						</ListBox>
+						
+						<Button x:Name="Connect_Button" Content="Connect"
+								HorizontalAlignment="Right" VerticalAlignment="Bottom"
+								HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+								Width="100" Margin="20 20"/>
+
+						<Grid.Styles>
+							<Style Selector="Button">
+								<Setter Property="Background" Value="#262626"/>
+								<Setter Property="BorderThickness" Value="1"/>
+								<Setter Property="BorderBrush" Value="#151515"/>
+							</Style>
+							<Style Selector="Button:pointerover /template/ ContentPresenter">
+								<Setter Property="Background" Value="#292929"/>
+								<Setter Property="BorderThickness" Value="1.4"/>
+								<Setter Property="BorderBrush" Value="#191919"/>
+							</Style>
+							<Style Selector="Button:pressed /template/ ContentPresenter">
+								<Setter Property="Background" Value="#303030"/>
+								<Setter Property="BorderThickness" Value="1.6"/>
+							</Style>
+						</Grid.Styles>
+					</Grid>
+
+				</TabItem>			
 				<TabControl.Styles>
 					<Style Selector="TabItem">
 						<Setter Property="Width" Value="158"/>

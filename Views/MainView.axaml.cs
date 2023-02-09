@@ -1,19 +1,13 @@
 using System;
-using System.IO;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Text.Json;
+using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Threading;
 using RLCClient.ViewModels;
-using System.Threading.Tasks;
-using System.Text.Json;
-using Avalonia.DesignerSupport.Remote.HtmlTransport;
-using System.Threading;
-using System.ComponentModel;
-using System.Drawing.Text;
-using System.Drawing.Printing;
-using Avalonia;
-using System.Diagnostics;
 
 namespace RLCClient.Views;
 
@@ -54,7 +48,7 @@ public partial class MainView : Window
             }
         }
     }
-    private bool SettingsTabElementsIsEnableState 
+    private bool SettingsTabElementsIsEnableState
     {
         set
         {
@@ -67,7 +61,7 @@ public partial class MainView : Window
             ResetPort_Button.IsEnabled = value;
             ResetShutdownTimeOut_Button.IsEnabled = value;
             ResetRestartTimeOut_Button.IsEnabled = value;
-            ResetSettings_Button.IsEnabled = value;
+            /*ResetSettings_Button.IsEnabled = value;*/
         }
     }
 
@@ -76,9 +70,8 @@ public partial class MainView : Window
 
     public MainView()
     {
-        InitializeComponent();
-
         DataContext = mainViewModel;
+        InitializeComponent();
 
         outputter = new TextBoxOutputter(LogOut);
         Console.SetOut(outputter);
@@ -88,8 +81,10 @@ public partial class MainView : Window
         InitCustomDebugMethod();
 
         this.Closing += WindowClosing;
+
     }
 
+    #region Settings
     private void InitSettings()
     {
         try
@@ -100,51 +95,51 @@ public partial class MainView : Window
             #region ResetButtonsClick
             ResetClientName_Button.Click += (_, __) =>
             {
-                CurrentSettings = new Settings 
-                { 
-                    ClientName = Settings.DefaultSettings.ClientName, 
-                    Port = CurrentSettings.Port, 
-                    ShutdownTimeOut = CurrentSettings.ShutdownTimeOut, 
+                CurrentSettings = new Settings
+                {
+                    ClientName = Settings.DefaultSettings.ClientName,
+                    Port = CurrentSettings.Port,
+                    ShutdownTimeOut = CurrentSettings.ShutdownTimeOut,
                     RestartTimeOut = CurrentSettings.RestartTimeOut
                 };
             };
             ResetPort_Button.Click += (_, __) =>
             {
-                CurrentSettings = new Settings 
-                { 
-                    ClientName = CurrentSettings.ClientName, 
-                    Port = Settings.DefaultSettings.Port, 
-                    ShutdownTimeOut = CurrentSettings.ShutdownTimeOut, 
-                    RestartTimeOut = CurrentSettings.RestartTimeOut 
+                CurrentSettings = new Settings
+                {
+                    ClientName = CurrentSettings.ClientName,
+                    Port = Settings.DefaultSettings.Port,
+                    ShutdownTimeOut = CurrentSettings.ShutdownTimeOut,
+                    RestartTimeOut = CurrentSettings.RestartTimeOut
                 };
             };
             ResetShutdownTimeOut_Button.Click += (_, __) =>
             {
-                CurrentSettings = new Settings 
-                { 
-                    ClientName = CurrentSettings.ClientName, 
-                    Port = CurrentSettings.Port, 
-                    ShutdownTimeOut = Settings.DefaultSettings.ShutdownTimeOut, 
-                    RestartTimeOut = CurrentSettings.RestartTimeOut 
+                CurrentSettings = new Settings
+                {
+                    ClientName = CurrentSettings.ClientName,
+                    Port = CurrentSettings.Port,
+                    ShutdownTimeOut = Settings.DefaultSettings.ShutdownTimeOut,
+                    RestartTimeOut = CurrentSettings.RestartTimeOut
                 };
             };
             ResetRestartTimeOut_Button.Click += (_, __) =>
             {
-                CurrentSettings = new Settings 
-                { 
-                    ClientName = CurrentSettings.ClientName, 
-                    Port = CurrentSettings.Port, 
-                    ShutdownTimeOut = CurrentSettings.ShutdownTimeOut, 
-                    RestartTimeOut = Settings.DefaultSettings.RestartTimeOut 
+                CurrentSettings = new Settings
+                {
+                    ClientName = CurrentSettings.ClientName,
+                    Port = CurrentSettings.Port,
+                    ShutdownTimeOut = CurrentSettings.ShutdownTimeOut,
+                    RestartTimeOut = Settings.DefaultSettings.RestartTimeOut
                 };
             };
-            ResetSettings_Button.Click += async (_, __) =>
-            {
-                if (await MessageBox.Show(this, "Reset all settings to default?", MessageBox.MessageBoxButtons.YesNo, "Confirm request") == MessageBox.MessageBoxResult.Yes)
-                {
-                    CurrentSettings = Settings.DefaultSettings;
-                }
-            };
+            /* ResetSettings_Button.Click += async (_, __) =>
+             {
+                 if (await MessageBox.Show(this, "Reset all settings to default?", MessageBox.MessageBoxButtons.YesNo, "Confirm request") == MessageBox.MessageBoxResult.Yes)
+                 {
+                     CurrentSettings = Settings.DefaultSettings;
+                 }
+             };*/
 
             #endregion
 
@@ -193,7 +188,7 @@ public partial class MainView : Window
 
         SettingsTabElementsIsEnableState = true;
     }
-
+    #endregion
     private static void TextBox_OnlyNumberFilter(object? sender, EventArgs e)
     {
         TextBox textBox = (TextBox)sender;
@@ -214,7 +209,7 @@ public partial class MainView : Window
         {
             Window window = (Window)sender;
 
-            if(Dialog)
+            if (Dialog)
             {
 
                 if (await MessageBox.Show(window, "Disconnect and close program?", MessageBox.MessageBoxButtons.OkCancel) == MessageBox.MessageBoxResult.Ok)
@@ -234,7 +229,7 @@ public partial class MainView : Window
             }
         }
 
-        if(isSettingsSaved)
+        if (isSettingsSaved)
         {
             Close(true);
         }
