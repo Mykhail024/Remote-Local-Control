@@ -179,17 +179,17 @@
 							<Border Width="150">
 								<TextBlock Text="Name"/>
 							</Border>
-							<Border Width="150">
+							<Border x:Name="ClientsIp" Width="150">
 								<TextBlock Text="Ip"/>
 							</Border>
 							<Border Width="120">
 								<TextBlock Text="Port"/>
 							</Border>
 							<Border Width="120">
-								<TextBlock Text="OS"/>
+								<TextBlock Text="Operating System"/>
 							</Border>
 							<Border Width="180">
-								<TextBlock HorizontalAlignment="Right" Text="Port"/>
+								<TextBlock HorizontalAlignment="Right" Text="Strength"/>
 							</Border>
 						</StackPanel>
 						<ListBox Margin="0 30 0 90" Background="#242424" 
@@ -212,7 +212,9 @@
 											<TextBlock Text="{Binding OS}"/>
 										</Border>
 										<Border Width="180">
-											<TextBlock HorizontalAlignment="Right" Text="{Binding Ping}"/>
+											<Image HorizontalAlignment="Right" VerticalAlignment="Center"
+												   Source="{Binding PingImage}"
+												   MaxHeight="20" ToolTip.Tip="{Binding Ping}"/>
 										</Border>
 									</StackPanel>
 								</DataTemplate>

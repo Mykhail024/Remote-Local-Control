@@ -96,18 +96,11 @@ public partial class MainViewModel : ReactiveObject
             new ("HONG", "129.123.43.1", 25565, "Windows", 0),
             new ("HONG19", "172.52.32.69", 25565, "Linux", 134),
             new ("Admin", "127.0.0.1", 25565, "Windows", 42),
-            new ("Anast", "127.0.0.1", 25565, "Android", 98),
-            new ("Drag", "127.0.0.1", 25565, "Windows", 53),
-            new ("LAstyl", "127.0.0.1", 25565, "MacOS", 10),
-            new ("test", "255.255.255.255", 25565, "MacOS", 10),
+            new ("Anast", "127.0.0.1", 25565, "Android", 302),
+            new ("Drag", "127.0.0.1", 25565, "Windows", 98),
+            new ("LAstyl", "127.0.0.1", 25565, "MacOS", 168),
+            new ("test", "255.255.255.255", 25565, "MacOS", 431),
 
         };
-
-    private IBrush _ClientsDataGridRowBackground = Brush.Parse("#999999");
-    public IBrush ClientsDataGridRowBackground
-    {
-        get => _ClientsDataGridRowBackground;
-        set => this.RaiseAndSetIfChanged(ref _ClientsDataGridRowBackground, value);
-    }
 
 }
