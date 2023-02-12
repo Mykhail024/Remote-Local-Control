@@ -1,15 +1,19 @@
 ﻿using System.Reflection;
 using Avalonia.Media.Imaging;
 using ReactiveUI;
+using RLCClient;
 
 namespace RLCClient
 {
+
+    public enum OperatingSystem { Windows, Linux, MacOS, Android, IOS }
+
     public class Client : ReactiveObject
     {
         public string Name { get; set; }
         public string Ip { get; set; }
         public int Port { get; set; }
-        public string OS { get; set; }
+        public OperatingSystem operatingSystem { get; set; }
         private int _Ping;
         public int Ping {
             get => _Ping;
@@ -33,12 +37,12 @@ namespace RLCClient
             private set => this.RaiseAndSetIfChanged(ref _PingImage, value);
         }
 
-        public Client(string Name, string Ip, int Port, string OS, int Ping)
+        public Client(string Name, string Ip, int Port, OperatingSystem operatingSystem, int Ping)
         {
             this.Name = Name;
             this.Ip = Ip;
             this.Port = Port;
-            this.OS = OS;
+            this.operatingSystem = operatingSystem;
             this.Ping = Ping;
         }
     }

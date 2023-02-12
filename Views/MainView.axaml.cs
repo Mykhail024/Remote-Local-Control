@@ -273,7 +273,6 @@ public partial class MainView : Window
             int i = 0;
             while (i < 101)
             {
-
                 await Task.Delay(100);
                 mainViewModel.BatteryPercent = i;
                 i++;

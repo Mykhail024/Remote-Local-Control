@@ -209,7 +209,7 @@
 											<TextBlock Text="{Binding Port}"/>
 										</Border>
 										<Border Width="120">
-											<TextBlock Text="{Binding OS}"/>
+											<TextBlock Text="{Binding operatingSystem}"/>
 										</Border>
 										<Border Width="180">
 											<Image HorizontalAlignment="Right" VerticalAlignment="Center"
